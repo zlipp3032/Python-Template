@@ -4,6 +4,22 @@ from collections import OrderedDict
 from datetime import datetime
 
 
+
+#################################################
+#! This is the vehicle state class. This class is comprised of the BasicVehcleState() class
+#  and the FullVehicleState() class.
+
+#! Note that the BasicVehicleState() class contains general parameters for each vehicle. This
+#  will be explained further when we begin to implement the commincation into this framework.
+
+#! Note that the FullVehicleState() class uses the vehicle's BasicVehicleState() as its base. We use
+#  a property called inheritance.
+
+#################################################
+
+
+
+#! Initiliaze the basic vehicle state class
 class BasicVehicleState(object):
     def __init__(self,other=None):
         self.ID = None
@@ -12,6 +28,7 @@ class BasicVehicleState(object):
         self.counter = 0
 
 
+    #! This is not used in the threading_intro, but will be used when logging data
     def getCSVLists(self):
         headers = []
         values = []
@@ -32,12 +49,13 @@ class BasicVehicleState(object):
         return out
 
 
-
+#! Initialize the full vehicle state class using the basic vehicle state class as a base
 class FullVehicleState(BasicVehicleState):
     def __init__(self):
         super(FullVehicleState, self).__init__()
         self.time = 0.0
 
+    #! This is not used in the threading intro, but will be used when logging data
     def getCSVLists(self):
         base = super(FullVehicleState,self).getCSVLists()
 
