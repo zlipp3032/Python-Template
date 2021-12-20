@@ -16,7 +16,7 @@ Some of the libaries needed to run the code are as follows:
 - json
 - copy
 
-Note that some of the libraries that are imported into this code are not used.
+Note that some of the libraries that are imported into this code are not used. This is because I am too lazy to go through a figure out which ones we don't need. Just trying to be honest.
 
 
 # Running the code
