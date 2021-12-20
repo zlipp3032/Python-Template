@@ -8,4 +8,4 @@ This repository is designed to aid in learning the UKy flight program used for f
 - (4) Logging with Threads - threads_log (in progress)
 - (5) Communication with Threads - threads_comms (in progress)
 
-Note this code does not include any of the algorithms for controlling the vehicles, but provides a template to the structure of the code used for the UAV projects.
+Note this code does not include any of the algorithms for controlling the vehicles, but provides a template to the structure of the code used for the UAV projects in a Python implementation.
