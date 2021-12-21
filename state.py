@@ -18,7 +18,8 @@ from datetime import datetime
 #################################################
 
 
-
+#! We create a record type structure (mimics a c struct)
+#                   ** This could probably be replaced by a list/dict **
 Message = recordtype('Message', 'type,send_time,content', default=None )
 
 
