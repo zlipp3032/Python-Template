@@ -19,6 +19,9 @@ from datetime import datetime
 
 
 
+Message = recordtype('Message', 'type,send_time,content', default=None )
+
+
 #! Initiliaze the basic vehicle state class
 class BasicVehicleState(object):
     def __init__(self,other=None):
@@ -29,7 +32,7 @@ class BasicVehicleState(object):
 
 
     #! This is not used in the threading_intro, but will be used when logging data
-    def getCSVLists(self):
+    def GetCSVLists(self):
         headers = []
         values = []
 
@@ -45,7 +48,7 @@ class BasicVehicleState(object):
         headers += ['x_vel','y_vel','z_vel']
         values  += [self.velocity['x'], self.velocity['y'], self.velocity['z']]
 
-        out = OrderedDict(zip(headers,values))
+        out = OrderedDict( zip(headers, values) )
         return out
 
 
@@ -56,15 +59,15 @@ class FullVehicleState(BasicVehicleState):
         self.time = 0.0
 
     #! This is not used in the threading intro, but will be used when logging data
-    def getCSVLists(self):
-        base = super(FullVehicleState,self).getCSVLists()
+    def GetCSVLists(self):
+        base = super(FullVehicleState, self).GetCSVLists()
 
-        headers = base.keys()
-        values = base.values()
+        headers = list(base.keys())
+        values = list(base.values())
 
         headers += ['time']
         values  += [self.time]
 
-        out = OrderedDict(zip(headers,values))
+        out = OrderedDict( zip(headers, values) ) 
         return out
         

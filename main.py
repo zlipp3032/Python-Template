@@ -7,6 +7,7 @@ import multiprocessing
 
 import state
 import controlSimple
+import logger
 
 import numpy as np
 import argparse
@@ -23,15 +24,32 @@ from datetime import datetime
 
 
 
+
+log_path = '' # Define the log path. Be sure to update this value or you might get an error!!!!!
+              #        Note: '' will log in the current folder
+num_vehicle = 1 # Number of "basic vehicles" to be logged
+my_id = 1
+
+
 start_time = datetime.now()
 
+
+#! Initialize the queues
+log_queue = multiprocessing.Queue() # Initialize the logging queue
+
+
 #! Initialize the controller class thread
-control_thread = controlSimple.Controller(start_time)
+control_thread = controlSimple.Controller(start_time, log_queue)
+
+#! Initialize the logging class thread
+file_suffix = '_v' + str(int(my_id))
+logging_thread = logger.Logger(log_queue, log_path, num_vehicle, start_time, file_suffix)
+
 
 #! Initialize the threads list
 threads = []
 threads.append(control_thread) # add the control thread to the threads list
-
+threads.append(logging_thread) # add the logging thread to the threads list
 
 #! Start the control thread
 #
@@ -40,6 +58,13 @@ threads.append(control_thread) # add the control thread to the threads list
 #  doing to threads['control_thread'], and vice versa.
 control_thread.start()
 print("Start Control")
+
+
+#! Start the logging thread
+logging_thread.start()
+print("Started Logging")
+
+
 
 
 
