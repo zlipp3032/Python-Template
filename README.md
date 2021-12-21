@@ -22,5 +22,5 @@ Note that some of the libraries that are imported into this code are not used.
 # Running the code
 - clone the repository
 - Navigate to the project root directory
-- Change to threads with logging branch by running 'git checkout threads_intro'
+- Change to threads intro branch by running 'git checkout threads_intro'
 - Run the command 'python main.py'
