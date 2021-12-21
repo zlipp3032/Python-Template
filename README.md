@@ -22,7 +22,7 @@ Note that some of the libraries that are imported into this code are not used. T
 # Running the code
 - clone the repository
 - Navigate to the project root directory
-- Change to threads intro branch by running 'git checkout threads_log'
+- Change to threads with logging branch by running 'git checkout threads_log'
 - Run the command 'python main.py'
 
 
