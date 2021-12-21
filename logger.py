@@ -15,7 +15,7 @@ import copy
 #! This is the logging class thread.
 
 #! We use the multiprocessing library to create a new process thread on the CPU for logging data.
-#  This is to promote putting more processing time in the control loop itself.
+#  This is to promote putting more processing time in the control loop itself.    this
 
 ###############################################
 
