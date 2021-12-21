@@ -16,9 +16,11 @@ from datetime import datetime
 
 ###############################################################
 
-#! This is the main script in the python threading introduction framework.
+#! This is the main script in the python logging introduction framework.
 
-#! NOTE every example here will have a main script
+#! We aim to create a logging thread and add it to our flight program framework. The goal is to
+#  place the current vehicle state into a logging queue that is then read by the logging thread
+#  and logged in a seperate process on the CPU.
 
 ###############################################################
 
@@ -28,7 +30,7 @@ from datetime import datetime
 log_path = '' # Define the log path. Be sure to update this value or you might get an error!!!!!
               #        Note: '' will log in the current folder
 num_vehicle = 1 # Number of "basic vehicles" to be logged
-my_id = 1
+my_id = 1  # Unique identifier of each vehicle.
 
 
 start_time = datetime.now()
