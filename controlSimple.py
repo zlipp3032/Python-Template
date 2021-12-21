@@ -18,10 +18,6 @@ import json
 
 #! In this version of the code, we build off of the previous branch on the github (thread_intro).
 
-#! We aim to create a logging thread and add it to our flight program framework. The goal is to
-#  place the current vehicle state into a logging queue that is then read by the logging thread
-#  and logged in a seperate process on the CPU.
-
 ###############################################
 
 #! Initialize the controller thread
