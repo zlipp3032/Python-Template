@@ -24,3 +24,9 @@ Note that some of the libraries that are imported into this code are not used. T
 - Navigate to the project root directory
 - Change to threads intro branch by running 'git checkout logger_intro'
 - Run the command 'python main.py'
+
+
+# Reading the data
+- This can be done in Matlab using 'readtable('path/to/file.csv')
+- This can be done in Python using Pandas.read_table('path/to/table').........I think. Haven't tested this, but it is something like this....
+- In both instances, you should be able to get to the resepective column of data using the prescribed column headers
