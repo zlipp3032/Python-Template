@@ -16,11 +16,11 @@ import json
 ###############################################
 #! This is the main control thread class, where the main flight control loop is running.
 
-#! In this version of the code, we simply run a timed loop at a constant set sampling frequency.
+#! In this version of the code, we build off of the previous branch on the github (thread_intro).
 
-#! We print the loop number and the time_to_wait variable. We compare the time_to_wait
-#  variable to the set loop time (self.Ts) to ensure the the loop is running at our
-#  desired rate. 
+#! We aim to create a logging thread and add it to our flight program framework. The goal is to
+#  place the current vehicle state into a logging queue that is then read by the logging thread
+#  and logged in a seperate process on the CPU.
 
 ###############################################
 
@@ -31,14 +31,13 @@ class Controller(threading.Thread):
         
         self.start_time = start_time
         self.Ts = 0.1 # Loop time
-        
-
+        self.stop_request = threading.Event()
         self.vehicle_state = FullVehicleState() # Set the self.vehicle_state parameter as the
                                                 #     FullVehicleState() class from state.py
-        self.vehicle_state.start_time = datetime.now() # Set the start time for vehicle_state     
+        self.vehicle_state.start_time = datetime.now() # Set the start time for vehicle_state
+
+        #! Create the log queue in the controller class
         self.log_queue = log_queue # Set the logging queue for the class as the same memory addresss of the main log_queue
-        self.stop_request = threading.Event()
- 
         
     #! Set the stop class function
     def stop(self):
@@ -47,7 +46,7 @@ class Controller(threading.Thread):
 
 
     #! Set the run class function. This is where the main control loop resides! You can call
-    #  other functions from this main loop. This will be shown in other examples.
+    #  other functions from this main loop.
     def run(self):
         #! Main control loop. We use the threading.Event() function as our control parameter
         #  for this loop.
@@ -58,7 +57,12 @@ class Controller(threading.Thread):
 
             ######################################################
             #! Do loop stuff here
-            self.PushToLoggingQueue()
+
+            #! Push the current self.vehicle_state to the logging queue
+            #  by calling the control class' function PushToLoggingQueue
+            self.PushToLoggingQueue() # Note: Notice that we use 'self.'
+                                      #       This is because it is the control class' function. We can remove
+                                      #       this by making the this functino a global function.
 
             ######################################################
             
@@ -74,14 +78,22 @@ class Controller(threading.Thread):
 
 
 
-
+        
+    #! This function places the current state of the vehicle to the logging queue
     def PushToLoggingQueue(self):
-        msg = Message()
+        #! Initiate the message variable
+        msg = Message() 
         msg.type = 'UAV_LOG'
         msg.send_time = time.time()
         msg.content = {}
+
+        #! Note that we use a deepcopy of the vehicle state. This basically means we are creating
+        #  a new heap of memory and storing the data at the current memory address at this new
+        #  memory address with no strings attached.
         msg.content['this_state'] = copy.deepcopy( self.vehicle_state )
-        #msg.content['other_states'] = copy.deepcopy( self.state_vehicles )
+        #msg.content['other_states'] = copy.deepcopy( self.state_vehicles ) # This is will be needed when we use communication
+
+        #! Push the current message (msg) to the logging queue
         self.log_queue.put( msg )
 
         
