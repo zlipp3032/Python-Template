@@ -28,5 +28,5 @@ Note that some of the libraries that are imported into this code are not used. T
 
 # Reading the data
 - This can be done in Matlab using 'readtable('path/to/file.csv')'
-- This can be done in Python using 'pandas.read_csv('path/to/table.csv')'
+- This can be done in Python using 'pandas.read_csv('path/to/table.csv')' ----> https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 - In both instances, you should be able to get to the resepective column of data using the prescribed column headers
